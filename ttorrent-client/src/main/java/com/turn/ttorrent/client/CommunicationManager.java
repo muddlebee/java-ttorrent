@@ -234,7 +234,7 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
 
   /**
    *
-   *
+   * calculate no. of pieces left to download
    *
    * @param pieceStorage
    * @param torrentMetadata
@@ -740,7 +740,7 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
       final Future<?> validationFuture = myPieceValidatorExecutor.submit(new Runnable() {
         @Override
         public void run() {
-          validatePieceAsync(torrent, piece, torrentHash, peer);
+          saveAndValidatePieceAsync(torrent, piece, torrentHash, peer);
         }
       });
       torrent.markCompletedAndAddValidationFuture(piece, validationFuture);
@@ -750,16 +750,27 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
     }
   }
 
-  private void validatePieceAsync(final SharedTorrent torrent, final Piece piece, String torrentHash, SharingPeer peer) {
+  /**
+   *
+   * save and validate each piece
+   *
+   * @param torrent
+   * @param piece
+   * @param torrentHash
+   * @param peer
+   */
+  private void saveAndValidatePieceAsync(final SharedTorrent torrent, final Piece piece, String torrentHash, SharingPeer peer) {
     try {
       synchronized (piece) {
 
         if (piece.isValid()) return;
 
         piece.validate(torrent, piece);
+
         if (piece.isValid()) {
           torrent.notifyPieceDownloaded(piece, peer);
-          piece.finish();
+          //validate and save piece
+          piece.savePiece();
           // Send a HAVE message to all connected peers, which don't have the piece
           PeerMessage have = PeerMessage.HaveMessage.craft(piece.getIndex());
           for (SharingPeer remote : getConnectedPeers()) {

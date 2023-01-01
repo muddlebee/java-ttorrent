@@ -12,8 +12,7 @@ import java.util.BitSet;
 public interface PieceStorage extends Closeable {
 
   /**
-   *
-   *
+   * save each piece
    *
    * @param pieceIndex
    * @param pieceData
