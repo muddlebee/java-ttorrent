@@ -49,17 +49,12 @@ public class PieceStorageImpl implements PieceStorage {
     checkPieceIndex(pieceIndex);
     try {
       readWriteLock.writeLock().lock();
-
       if (closedFully) throw new IOException("Storage is closed");
 
       BitSet availablePieces = this.availablePieces;
-
       boolean isFullyDownloaded = availablePieces == null;
-
       if (isFullyDownloaded) return;
-
       if (availablePieces.get(pieceIndex)) return;
-
       openStorageIsNecessary(false);
 
       long pos = pieceIndex;
