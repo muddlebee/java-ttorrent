@@ -225,11 +225,21 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
     eventDispatcher.multicaster().validationComplete(pieceStorage.getAvailablePieces().cardinality(), torrentMetadata.getPiecesCount());
 
     this.torrentsStorage.addTorrent(loadedTorrent.getTorrentHash().getHexInfoHash(), loadedTorrent);
+
+    //TODO: refactor and make it more meaningful
     forceAnnounceAndLogError(loadedTorrent, pieceStorage.isFinished() ? COMPLETED : STARTED);
     logger.debug(String.format("Added torrent %s (%s)", loadedTorrent, loadedTorrent.getTorrentHash().getHexInfoHash()));
     return new TorrentManagerImpl(eventDispatcher, loadedTorrent.getTorrentHash());
   }
 
+  /**
+   *
+   *
+   *
+   * @param pieceStorage
+   * @param torrentMetadata
+   * @return
+   */
   private long calculateLeft(PieceStorage pieceStorage, TorrentMetadata torrentMetadata) {
 
     long size = 0;
@@ -249,6 +259,13 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
     return result;
   }
 
+  /**
+   *
+   * fetch pieces and set each piece in storage
+   *
+   * @param torrent
+   * @param event
+   */
   private void forceAnnounceAndLogError(LoadedTorrent torrent, AnnounceRequestMessage.RequestEvent event) {
     try {
       this.announce.forceAnnounce(torrent.createAnnounceableInformation(), this, event);

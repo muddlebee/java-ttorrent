@@ -24,7 +24,7 @@ public class SimpleClientTest {
             throw new RuntimeException(e);
         }
         try {
-            client.downloadTorrent("src/main/resources/ubuntu-22.04.1-desktop-amd64.iso.torrent", "C:/Users/91824/Downloads/", address);
+            client.downloadTorrent( "C:/Users/91824/Downloads/code-of-trust-2019-720p.torrent", "C:/Users/91824/Downloads/", address);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Provided access to all stored info in .torrent file
  *
- * @see <a href="https://wiki.theory.org/index.php/BitTorrentSpecification#Metainfo_File_Structure"></a>
+ * @see <a href="https://wiki.theory.org/BitTorrentSpecification#Metainfo_File_Structure"></a>
  */
 public interface TorrentMetadata extends TorrentHash {
 
