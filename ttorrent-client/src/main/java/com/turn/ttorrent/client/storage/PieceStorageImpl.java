@@ -60,6 +60,7 @@ public class PieceStorageImpl implements PieceStorage {
       long pos = pieceIndex;
       pos = pos * pieceSize;
       ByteBuffer buffer = ByteBuffer.wrap(pieceData);
+      //storage write for multiple files with multiple pieces
       fileCollectionStorage.write(buffer, pos);
 
       availablePieces.set(pieceIndex);
@@ -87,7 +88,6 @@ public class PieceStorageImpl implements PieceStorage {
     checkPieceIndex(pieceIndex);
     try {
       readWriteLock.readLock().lock();
-
       if (closedFully) throw new IOException("Storage is closed");
 
       BitSet availablePieces = this.availablePieces;
