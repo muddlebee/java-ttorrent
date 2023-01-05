@@ -111,14 +111,14 @@ public abstract class TrackerClient {
                       this.formatAnnounceEvent(event),
                       torrent.getUploaded(),
                       torrent.getDownloaded(),
-                      torrent.getLeft()
+                      torrent.getRemainingBytes()
               });
     } else {
       logger.debug("Simply announcing to tracker with {}U/{}D/{}L bytes...",
               new Object[]{
                       torrent.getUploaded(),
                       torrent.getDownloaded(),
-                      torrent.getLeft()
+                      torrent.getRemainingBytes()
               });
     }
   }

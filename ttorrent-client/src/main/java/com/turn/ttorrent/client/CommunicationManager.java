@@ -226,7 +226,7 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
 
         this.torrentsStorage.addTorrent(loadedTorrent.getTorrentHash().getHexInfoHash(), loadedTorrent);
 
-        //TODO: refactor and make it more meaningful
+        //TODO: refactor func name and make it more meaningful
         forceAnnounceAndLogError(loadedTorrent, pieceStorage.isFinished() ? COMPLETED : STARTED);
         logger.debug(String.format("Added torrent %s (%s)", loadedTorrent, loadedTorrent.getTorrentHash().getHexInfoHash()));
         return new TorrentManagerImpl(eventDispatcher, loadedTorrent.getTorrentHash());
@@ -626,6 +626,7 @@ public class CommunicationManager implements AnnounceResponseListener, PeerActiv
         setAnnounceInterval(interval);
     }
 
+    //TODO:understand this method
     /**
      * Handle the discovery of new peers.
      *

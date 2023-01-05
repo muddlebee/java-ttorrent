@@ -17,7 +17,7 @@ public interface AnnounceableInformation extends TorrentHash {
   /**
    * @return number of bytes left to download by the client for this torrent
    */
-  long getLeft();
+  long getRemainingBytes();
 
   /**
    * @return all tracker for announce

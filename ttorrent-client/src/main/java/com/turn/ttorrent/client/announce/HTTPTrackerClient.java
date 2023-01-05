@@ -313,7 +313,7 @@ public class HTTPTrackerClient extends TrackerClient {
     // Build announce request message
     final long uploaded = torrentInfo.getUploaded();
     final long downloaded = torrentInfo.getDownloaded();
-    final long left = torrentInfo.getLeft();
+    final long left = torrentInfo.getRemainingBytes();
     return HTTPAnnounceRequestMessage.craft(
             torrentInfo.getInfoHash(),
             peer.getPeerIdArray(),
