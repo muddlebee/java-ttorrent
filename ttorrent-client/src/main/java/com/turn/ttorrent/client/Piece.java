@@ -244,7 +244,7 @@ public class Piece implements Comparable<Piece>, PieceInformation {
     block.position(pos);
   }
 
-  public void finish() throws IOException {
+  public void savePiece() throws IOException {
     this.data.rewind();
     logger.trace("Recording {}...", this);
     try {

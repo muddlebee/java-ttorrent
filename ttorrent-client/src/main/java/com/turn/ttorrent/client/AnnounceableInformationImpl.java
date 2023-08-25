@@ -39,7 +39,7 @@ class AnnounceableInformationImpl implements AnnounceableInformation {
   }
 
   @Override
-  public long getLeft() {
+  public long getRemainingBytes() {
     return left;
   }
 

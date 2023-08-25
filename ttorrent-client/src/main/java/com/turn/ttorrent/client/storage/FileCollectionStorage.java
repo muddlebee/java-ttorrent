@@ -66,6 +66,14 @@ public class FileCollectionStorage implements TorrentByteStorage {
             "({} total byte(s)).", files.size(), size);
   }
 
+  /**
+   *  Initialize a new multi-file torrent byte storage and return it
+   *
+   * @param metadata
+   * @param parent
+   * @return
+   * @throws IOException
+   */
   public static FileCollectionStorage create(TorrentMetadata metadata, File parent) throws IOException {
     if (!parent.isDirectory()) {
       throw new IllegalArgumentException("Invalid parent directory!");
@@ -73,6 +81,7 @@ public class FileCollectionStorage implements TorrentByteStorage {
     List<FileStorage> files = new LinkedList<FileStorage>();
     long offset = 0L;
     long totalSize = 0;
+
     for (TorrentFile file : metadata.getFiles()) {
       File actual = new File(parent, file.getRelativePathAsString());
 

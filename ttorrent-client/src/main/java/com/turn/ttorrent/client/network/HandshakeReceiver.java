@@ -39,6 +39,12 @@ public class HandshakeReceiver implements DataProcessor {
     this.myIsOutgoingConnection = isOutgoingListener;
   }
 
+  /**
+   *
+   * @param socketChannel specified socket channel with data
+   * @return
+   * @throws IOException
+   */
   @Override
   public DataProcessor processAndGetNext(ByteChannel socketChannel) throws IOException {
 

@@ -62,8 +62,8 @@ public class TrackerClientTest {
     List<Peer> leecher = Collections.singletonList(new Peer(new InetSocketAddress("127.0.0.1", 6885), ByteBuffer.allocate(1)));
     final AnnounceableInformation firstTorrentLeech = getMockedTorrent(new byte[]{1, 2, 3, 4});
     final AnnounceableInformation secondTorrentLeech = getMockedTorrent(new byte[]{1, 3, 3, 2});
-    when(firstTorrentLeech.getLeft()).thenReturn(10L);
-    when(secondTorrentLeech.getLeft()).thenReturn(10L);
+    when(firstTorrentLeech.getRemainingBytes()).thenReturn(10L);
+    when(secondTorrentLeech.getRemainingBytes()).thenReturn(10L);
 
     AnnounceResponseListener listener = mock(AnnounceResponseListener.class);
 
@@ -78,7 +78,7 @@ public class TrackerClientTest {
 
   private AnnounceableInformation getMockedTorrent(byte[] hash) {
     final AnnounceableInformation result = mock(AnnounceableInformation.class);
-    when(result.getLeft()).thenReturn(0L);
+    when(result.getRemainingBytes()).thenReturn(0L);
     when(result.getDownloaded()).thenReturn(0L);
     when(result.getUploaded()).thenReturn(0L);
     when(result.getInfoHash()).thenReturn(hash);
